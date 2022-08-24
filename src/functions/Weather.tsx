@@ -111,13 +111,7 @@ export default class Weather {
 
       const res2 = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${ data[0].lat }&lon=${ data[0].lon }&appid=${ this.apiKey }`)
       const data2 = await res2.json()
-
-      const timezone: number = data2.timezone
-      console.log(data2);
-      // const [h, m] = data2.timezone.split(':')
-      // console.log(h, m)
-
-      console.log(timezone);
+      
       return {
          city: data[0].name,
          countryCode: data[0].country,

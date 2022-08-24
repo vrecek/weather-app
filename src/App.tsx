@@ -30,7 +30,6 @@ function App() {
          try {
             const data = await weather.getWeatherCoords(pos.coords.latitude, pos.coords.longitude)
             const { theme, image } = weather.selectInformations(data?.weather)
-            console.log( new Date().toLocaleTimeString('PL', { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone }) )
 
             Object.assign(finalObject, {
                details: data,
