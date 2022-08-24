@@ -1,0 +1,34 @@
+@import './config';
+
+section.empty {
+   section.last-searched {
+      width: 100%;
+      background: rgba(65, 105, 225, 0.7);
+      border-radius: .15em;
+      padding: .5em;
+      margin-top: 2em;
+      width: 550px;
+      max-width: 98vw;
+
+      h6 {
+         font-weight: 500;
+         margin-bottom: 1em;
+         font-size: .8rem;
+         border-bottom: 1px solid $clr-white;
+         width: max-content;
+      }
+
+      ul {
+         list-style: none;
+         display: flex;
+         flex-wrap: wrap;
+         
+         li {
+            margin-right: 1.5em;
+            text-transform: capitalize;
+            font-weight: 700;
+            @include Clamp(.8, 3, .9);
+         }
+      }
+   }
+}

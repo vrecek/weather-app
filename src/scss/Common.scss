@@ -1,0 +1,30 @@
+@import './config';
+
+section.start,
+section.empty,
+section.error {
+   @include Flex(c, c);
+   flex-direction: column;
+}
+
+h1.info-h1,
+h2.info-h2 {
+   padding: 0 .5em;
+   text-align: center;
+}
+
+span.info-icon {
+   @include Rectangle(clamp(45px, 10vw, 60px));
+   svg { @include FullSize; }
+}
+
+h1.info-h1 {
+   font-weight: 800;
+   @include Clamp(2, 5, 3);
+
+}
+
+h2.info-h2 {
+   @include Clamp(.9, 4, 1);
+   font-weight: 600;
+}

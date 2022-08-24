@@ -1,0 +1,9 @@
+@import './config';
+
+section.error {
+   h3 {
+      @include Clamp(1.25, 4, 2);
+      font-weight: 500;
+      margin-top: 1.5em;
+   }
+}

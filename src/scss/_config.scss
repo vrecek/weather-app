@@ -1,0 +1,46 @@
+$clr-white: rgb(245, 245, 245);
+$clr-black: rgb(45, 45, 45);
+
+@mixin FullSize($size: 100%) {
+   width: $size;
+   height: $size;
+}
+
+@mixin Clamp($min, $vw, $max) {
+   font-size: clamp(#{$min}rem, #{$vw}vw, #{$max}rem);
+}
+
+@mixin Absolute($l: auto, $t: auto, $b: auto, $r: auto) {
+   position: absolute;
+   left: $l;
+   top: $t;
+   bottom: $b;
+   right: $r;
+}
+
+@mixin Rectangle($valPX) {
+   display: block;
+   height: $valPX;
+   width: $valPX;
+}
+
+@mixin Flex($justify: none, $align: none) {
+   display: flex;
+   justify-content: FlexFunc($justify);
+   align-items: FlexFunc($align);
+}
+
+// # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+@function FlexFunc($val) {
+   $finalVal: none;
+
+   @if $val == sb { $finalVal: space-between; }
+   @else if $val == c { $finalVal: center }
+   @else if $val == sa { $finalVal: space-around; }
+   @else if $val == fe { $finalVal: flex-end; }
+   @else if $val == fs { $finalVal: flex-start; }
+   @else if $val == st { $finalVal: stretch; }
+
+   @return $finalVal;
+}

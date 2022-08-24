@@ -1,0 +1,27 @@
+section.empty section.last-searched {
+  width: 100%;
+  background: rgba(65, 105, 225, 0.7);
+  border-radius: 0.15em;
+  padding: 0.5em;
+  margin-top: 2em;
+  width: 550px;
+  max-width: 98vw;
+}
+section.empty section.last-searched h6 {
+  font-weight: 500;
+  margin-bottom: 1em;
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgb(245, 245, 245);
+  width: max-content;
+}
+section.empty section.last-searched ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+section.empty section.last-searched ul li {
+  margin-right: 1.5em;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: clamp(0.8rem, 3vw, 0.9rem);
+}

@@ -1,0 +1,313 @@
+@import './config';
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-weight: 400;
+}
+
+body {
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+   font-family: 'Sora', sans-serif;
+}
+
+div.App {
+   overflow-x: hidden;
+
+   &.light {
+      &, input { color: $clr-white; }
+
+      article.city-info, article.weather-info { background: rgba(50, 50, 50, .7); box-shadow: 0 0 5px grey; }
+      article.city-info section.status h5 { border-top: 1px solid $clr-white; border-bottom: 1px solid $clr-white; }
+   }
+
+   &.dark {
+      &, input { color: $clr-black; }
+
+      article.city-info, article.weather-info { background: rgba(220, 220, 220, .7); box-shadow: 0 0 5px rgb(109, 109, 109); }
+      article.city-info section.status h5 { border-top: 1px solid $clr-black; border-bottom: 1px solid $clr-black; }
+   }
+}
+
+figure.background {
+   @include FullSize;
+   @include Absolute;
+   z-index: -1;
+
+   img {
+      @include FullSize;
+      object-fit: cover;
+      animation: anim 20s infinite;
+   }
+
+   @keyframes anim {
+      0% { transform: scale(1); }
+      20% { transform: scale(1.1) translateX(2%); }
+      40% { transform: scale(1.15) translateX(0); }
+      60% { transform: scale(1.1) translateX(-2%); }
+      80% { transform: scale(1.15) translateX(5%); }
+      100% { transform: scale(1) translateX(0); }
+   }
+}
+
+nav.navigation {
+   @include Flex(sb, c);
+   padding: .5em 1em;
+
+   h1, li { 
+      @include Clamp(.7, 2.5, .9);
+   }
+
+   section.search {
+      width: 350px;
+      max-width: 45%;
+      @include Flex(none, c);
+      position: relative;
+
+      input {
+         width: 100%;
+         outline: 0;
+         border: 0;
+         background: none;
+         border-bottom: 2px solid rgb(40, 218, 13);
+         padding: .5em 25px .5em 0;
+         text-align: center;
+         font-family: 'Sora', sans-serif;
+         font-weight: 500;
+         @include Clamp(.7, 2.5, .9);
+      }
+
+      span {
+         @include Flex(c, c);
+
+         svg { pointer-events: none; }
+
+         &.search-icon {
+            @include Rectangle(clamp(30px, 6vw, 33px));
+            @include Absolute(0, 50%);
+            transform: translate(-100%, calc(-50% + 6px));
+
+            svg { @include FullSize(80%); }
+         }
+
+         &.del-icon {
+            @include Absolute(auto, 50%, 0, 0);
+            transform: translateY(calc(-50% - 2px));
+            color: rgb(228, 8, 52);
+            cursor: pointer;
+            transition: .3s;
+            @include Rectangle(clamp(15px, 5vw, 18px));
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+
+            svg { @include FullSize; }
+
+            &:hover { color: red; }
+         }
+      }
+   }
+
+   h1 {
+      font-weight: 800;
+      font-style: italic;
+   }
+   
+   ul {
+      list-style: none;
+
+      li {
+         cursor: pointer;
+         transition: .5s;
+         text-transform: uppercase;
+         font-weight: 500;
+         
+         &:hover { color: rgb(104, 142, 255); }
+      }
+   }
+}
+
+div.wrap {
+   height: 82vh;
+   @include Flex(sa, c);
+
+   article.city-info,
+   article.weather-info {
+      padding: 1.5em;
+      border-radius: .5em;
+      width: 600px;
+      margin: 0 .25em;
+      height: 55vh;
+   }
+
+   article.city-info,
+   article.weather-info {
+      div.info {
+         @include Flex(sb, c);
+         &:not(:last-child) { margin-bottom: .5em; }
+
+         h4 {
+            @include Clamp(.8, 4, .95);
+            margin-right: .75em;    
+
+            &.info {
+               font-weight: 600;
+            }
+
+            &.value {
+               font-weight: 800;
+               text-align: right;
+            }
+         }
+      }
+   }
+
+   article.city-info {
+      div.time {
+         margin-bottom: .5em;
+
+         h5 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+         }
+      }
+
+      section {
+         &.status {
+            @include Flex(c, c);
+            flex-direction: column;
+            margin-bottom: 1.5em;
+
+            h5 {
+               font-weight: 400;
+               @include Clamp(1.5, 5, 2);
+               margin-top: .3em;
+               width: 100%;
+               text-align: center;
+            }
+
+            span {
+               @include Rectangle(clamp(60px, 15vw, 80px));
+
+               svg { @include FullSize; }
+            }
+         }
+      }
+   }
+
+   article.weather-info {
+      div.info {
+         &.temp {
+            h4.value {
+               @include Clamp(.7, 3, .8);
+            }
+         }
+      }
+      
+      section {
+         &.temperature {
+            @include Flex(c, fe);
+            margin-bottom: 2em;
+
+            div {
+               padding-bottom: 1em;
+
+               h6 {
+                  font-weight: 500;
+                  @include Clamp(.8, 1.5, 1);
+
+                  &:nth-child(2) { margin-top: .25em; }
+               }
+            }
+
+            h2 {
+               @include Clamp(2, 6, 5);
+               font-weight: 800;
+               margin: 0 .25em 0 .15em;
+            }
+
+            h4 {
+               @include Clamp(1, 2, 1.5);
+               font-weight: 500;
+               padding-bottom: .75em;
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 768px) {
+   body { height: auto; }
+
+   nav.navigation {
+      margin-bottom: 2em;
+   }
+
+   div.wrap {
+      flex-direction: column;
+      height: auto;
+      padding: 0 .25em;
+
+      article.city-info,
+      article.weather-info {
+         width: 100%;
+         padding: 1em .5em;
+         height: auto;
+      }
+
+      article.weather-info {
+         margin-bottom: 2em;
+
+         section.temperature {
+            div {
+               h6 {
+                  @include Clamp(.8, 4, 1);
+               }
+            }
+
+            h2 {
+               @include Clamp(2, 10, 5);
+            }
+
+            h4 {
+               @include Clamp(1, 4, 1.5);
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 480px) {
+   nav.navigation {
+      h1 { display: none; }
+
+      section.search {
+         max-width: 100%;
+         width: 160px;
+
+         input { text-align: left; }
+
+         span {
+            &.search-icon {
+               position: static;
+               transform: translate(0, 0);
+               transform: translateY(4px);
+            }
+         }
+      }
+   }
+
+   div.wrap {
+      article.weather-info {
+         section.temperature {
+            div { padding-bottom: .25em; }
+
+            h4 { padding-bottom: .25em; }
+         }
+      }
+   }
+}
